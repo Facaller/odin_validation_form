@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* General */
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1.6fr 2fr;
+}
+
+/* Header section */
+
+.header {
+    grid-column: 1/2;
+}
+
+/* Form section */
+
+.form-area {
+    grid-column: 2/3;
+}
