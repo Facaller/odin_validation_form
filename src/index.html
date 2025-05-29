@@ -16,36 +16,36 @@
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, alias!</h2>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi distinctio error saepe enim fugit, iusto sit laudantium maiores corrupti quae ducimus repudiandae explicabo suscipit cumque?</p>
         </div>
-        <div>
-            <form action="">
-                <div>
-                    <label for=""></label>
-                    <input type="text" name="" id="">
-                    <label for=""></label>
-                    <select name="" id="">
+        <form class="form-container" action="" novalidate>
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name">
+                    <label for="country">Country</label>
+                    <select name="country" id="country">
                         <option value=""></option>
                         <option value=""></option>
                         <option value=""></option>
                         <option value=""></option>
                         <option value=""></option>
                     </select>
-                    <label for=""></label>
-                    <input type="password" name="" id="">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password">
                 </div>
-                <div>
-                    <label for=""></label>
-                    <input type="email" name="" id="">
-                    <label for=""></label>
-                    <input type="text" name="" id="">
-                    <label for=""></label>
-                    <input type="password" name="" id="">
+                <div class="form-column">
+                    <label for="mail">Email</label>
+                    <input type="email" name="mail" id="mail">
+                    <label for="postal-code">Postal Code</label>
+                    <input type="text" name="postal-code" id="postal-code">
+                    <label for="pass-confirmation">Password Confirmation</label>
+                    <input type="password" name="pass-confirmation" id="pass-confirmation">
                 </div>
-                <div>
-                    <button type="submit"></button>
-                    <p> <a href=""></a>Log in</p>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="button-container">
+                <button type="submit">Create Account</button>
+                <p>Already have an account? <a href=""></a>Log in</p>
+            </div>
+        </form>
     </div>
 </body>
 </html>

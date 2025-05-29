@@ -27,3 +27,20 @@ img {
 .form-area {
     grid-column: 2/3;
 }
+
+.form-container {
+    
+}
+
+.form-row {
+    display: flex;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    
+}
