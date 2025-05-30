@@ -9,15 +9,24 @@ export class Validator {
     }
 
     nameValidation (nameElement) {
+        const value = nameElement.value;
+        const pattern = this.name;
+        
         if (nameElement.validity.valueMissing) {
             return "Please enter your name."
         } else if (nameElement.validity.tooShort) {
-            return `Name must be at least ${nameElement.minlength}.`
+            return `Name must be at least ${nameElement.minLength} characters.`
         } else if (nameElement.validity.tooLong) {
-            return `Name can't be longer than ${nameElement.maxlength}.`
-        } else if (nameElement.validity.patternMismatch) {
-            return "Your name contains characters that aren't allowed.";
+            return `Name can't be longer than ${nameElement.maxLength} characters.`
+        } else if (!pattern.test(value)) {
+            for (let char of value) {
+                if (!pattern.test(char)) {
+                    return `The character "${char}" isn't allowed in a name.`;
+                }
+            }
+            return "Your name contains invalid characters";
         }
+        return null;
     }
 
     emailValidation (emailElement) {
