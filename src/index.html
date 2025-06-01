@@ -20,9 +20,9 @@
             <div class="form-row">
                 <div class="form-column">
                     <label for="name">Name</label>
-                    <input type="text" name="name" id="name" minlength="3" maxlength="100">
+                    <input type="text" name="name" id="name" minlength="3" maxlength="100" required>
                     <label for="country">Country</label>
-                    <select name="country" id="country">
+                    <select name="country" id="country" required>
                         <option value=""></option>
                         <option value=""></option>
                         <option value=""></option>
@@ -30,15 +30,15 @@
                         <option value=""></option>
                     </select>
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password">
+                    <input type="password" name="password" id="password" minlength="8" maxlength="24" required>
                 </div>
                 <div class="form-column">
                     <label for="mail">Email</label>
-                    <input type="email" name="mail" id="mail">
+                    <input type="email" name="mail" id="mail" required>
                     <label for="postal-code">Postal Code</label>
-                    <input type="text" name="postal-code" id="postal-code">
+                    <input type="text" name="postal-code" id="postal-code" required>
                     <label for="pass-confirmation">Password Confirmation</label>
-                    <input type="password" name="pass-confirmation" id="pass-confirmation">
+                    <input type="password" name="pass-confirmation" id="pass-confirmation" minlength="8" maxlength="24" required>
                 </div>
             </div>
             <div class="button-container">
