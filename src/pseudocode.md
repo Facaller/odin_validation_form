@@ -8,57 +8,34 @@
 
 *******************
 
-Yes — adding a patterns or regex property in your Validator class (as a variable in the constructor or a class property) is a smart move. It keeps your patterns centralized, easy to update, and avoids duplication across methods.
+🧠 Goal:
+Instead of stopping at the first failure, we want to:
 
-Here's why it's a good idea:
-✅ Separation of logic: You define your rules in one place.
+Check all constraints
 
-✅ Scalability: If you want to support multiple countries or input types later, you can expand it easily.
+Collect every message where the rule fails
 
-✅ Clarity: Makes your validation methods cleaner — they just use the pattern instead of hardcoding it.
+Return all those messages (probably as an array)
 
-Example Structure (just the idea):
-js
-Copy
-Edit
-constructor() {
-    this.patterns = {
-        postal: /^[0-9]{5}$/,  // e.g., US ZIP code
-        name: /^[A-Za-z\s\-]+$/, // optional, if you use patternMismatch
-        // add more as needed
-    };
-}
-Then in your postalValidation(postalElement) method, you'd do:
+🔍 Think about this:
+What kind of variable would you need to collect multiple messages?
 
-js
-Copy
-Edit
-if (!this.patterns.postal.test(postalElement.value)) {
-    return "Enter a valid postal code.";
-}
-Or if you're using pattern in HTML and validity.patternMismatch, just make sure the pattern string in HTML matches the one in your class.
+Where would you add a message if a rule fails?
 
-So yes — go ahead with that approach. It’s a great step toward writing cleaner, maintainable validation code, even as a beginner. Let me know if you want help deciding on a regex for a specific country’s postal code.
+After the loop finishes, what would you return if:
 
-nameValidation(nameElement) {
-    const value = nameElement.value;
-    const pattern = this.patterns.name;
+There are failed messages?
 
-    if (nameElement.validity.valueMissing) {
-        return "Please enter your name.";
-    } else if (nameElement.validity.tooShort) {
-        return `Name must be at least ${nameElement.minLength} characters.`;
-    } else if (nameElement.validity.tooLong) {
-        return `Name can't be longer than ${nameElement.maxLength} characters.`;
-    } else if (!pattern.test(value)) {
-        // Loop through each character to find the first invalid one
-        for (let char of value) {
-            if (!pattern.test(char)) {
-                return `The character "${char}" isn't allowed in a name.`;
-            }
-        }
-        return "Your name contains invalid characters."; // fallback
-    }
+There are none?
 
-    return null; // no error
-}
+🛠 Hints for Implementation:
+Start by creating an empty array before the loop.
+
+During the loop, push messages into it when a test fails.
+
+After the loop:
+
+If the array has messages → return it
+
+Otherwise → return null (everything passed)
+

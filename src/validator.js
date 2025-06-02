@@ -1,7 +1,12 @@
 export class Validator {
     constructor () {
         this.nameConstraint = /^[A-Za-zÀ-ÖØ-öø-ÿ'’\- ]+$/
-        this.passConstraint = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]).{8,}$/
+        this.passConstraints = [
+            { pattern: /[a-z]/, message: "You need at least one lowercase letter" },
+            { pattern: /[A-Z]/, message: "You need at least one uppercase letter" },
+            { pattern: /\d/, message: "You need at least one digit" },
+            { pattern: /[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]/, message: "You need at least one special character" }
+        ]
         this.postalConstraints = {
             ch: [
                 "^(CH-)?\\d{4}$",
@@ -69,6 +74,7 @@ export class Validator {
 
     postalValidation (countryValue, postalElement) {
         const constraint = new RegExp(this.postalConstraints[countryValue][0], '');
+        
         if (constraint.test(postalElement.value)) {
             postalElement.setCustomValidity('');
         } else {
@@ -79,14 +85,18 @@ export class Validator {
 
     passValidation (passElement) {
         const value = passElement.value;
-        const constraint = this.passConstraint;
+        const constraints = this.passConstraints;
 
         if (passElement.validity.tooLong) {
             return "Your password can't be longer than 24 characters";
         } else if (passElement.validity.tooShort) {
             return "Your password can't be shorter than 8 characters";
-        } else if (!constraint.test(value)) {
-            return 'Your password must contain the right characters';
+        }
+        
+        for (let constraint of constraints) {
+            if (!constraint.pattern.test(value)) {
+                return constraint.message;
+            }
         }
         return null;
     }
