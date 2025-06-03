@@ -33,7 +33,7 @@ export class Validator {
 
     groupValidation () {
         if (param.validity.valueMissing) {
-            return 'This field cannot be empty.'
+            return "This field cannot be empty."
         }
     }
 
@@ -51,14 +51,14 @@ export class Validator {
                     return `The character "${char}" isn't allowed in a name.`;
                 }
             }
-            return 'Your name contains invalid characters';
+            return "Your name contains invalid characters";
         }
         return null;
     }
 
     emailValidation (emailElement) {
         if (emailElement.validity.typeMismatch) {
-            return 'You need to enter an email address.'
+            return "You need to enter an email address."
         } else if (emailElement.validity.tooShort) {
             return `Email should be at least ${emailElement.minLength} characters; you entered ${emailElement.value.length}`;
         }
@@ -67,16 +67,16 @@ export class Validator {
 
     countryValidation (countryElement) {
         if (countryElement.selectedIndex === 0) {
-            return 'Please choose a country'
+            return "Please choose a country"
         }
         return null;
     }
 
     postalValidation (countryValue, postalElement) {
-        const constraint = new RegExp(this.postalConstraints[countryValue][0], '');
+        const constraint = new RegExp(this.postalConstraints[countryValue][0], "");
         
         if (constraint.test(postalElement.value)) {
-            postalElement.setCustomValidity('');
+            postalElement.setCustomValidity("");
         } else {
             postalElement.setCustomValidity(constraint[countryValue][1]);
         }
@@ -92,16 +92,29 @@ export class Validator {
         } else if (passElement.validity.tooShort) {
             return "Your password can't be shorter than 8 characters";
         }
+
+        const errorArray = [];
         
         for (let constraint of constraints) {
             if (!constraint.pattern.test(value)) {
-                return constraint.message;
+                errorArray.push(constraint.message)
             }
         }
+
+        if (!errorArray.length > 0) {
+            return errorArray;
+        }
+
         return null;
     }
 
-    passConfirmationValidation (passConfirmElement) {
+    passConfirmationValidation (passConfirmElement, passElement) {
+        const passValue = passElement.value;
+        const confirmValue = passConfirmElement.value;
 
+        if (confirmValue.trim() !== passValue.trim()) {
+            return "Your passwords don't match"
+        }
+        return null;
     }
 }
