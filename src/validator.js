@@ -38,7 +38,7 @@ export class Validator {
     }
 
     nameValidation (nameElement) {
-        const value = nameElement.value;
+        const value = nameElement.value.trim();
         const pattern = this.nameConstraint;
         
         if (nameElement.validity.tooShort) {
