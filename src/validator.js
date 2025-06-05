@@ -32,28 +32,33 @@ export class Validator {
     }
 
     groupValidation () {
-        if (param.validity.valueMissing) {
-            return "This field cannot be empty."
-        }
+        
     }
 
     nameValidation (nameElement) {
-        const value = nameElement.value.trim();
-        const pattern = this.nameConstraint;
-        
+        const trimmed = nameElement.value.trim()
+
         if (nameElement.validity.tooShort) {
             return `Name must be at least ${nameElement.minLength} characters.`
         } else if (nameElement.validity.tooLong) {
             return `Name can't be longer than ${nameElement.maxLength} characters.`
-        } else if (!pattern.test(value)) {
+        }
+
+        this.findInvalidCharacter(trimmed, this.nameConstraint)
+        return null;
+    }
+
+    findInvalidCharacter (value, pattern) {
+
+        if (!pattern.test(value)) {
             for (let char of value) {
                 if (!pattern.test(char)) {
                     return `The character "${char}" isn't allowed in a name.`;
                 }
             }
-            return "Your name contains invalid characters";
+
+        return "Your name contains invalid characters";
         }
-        return null;
     }
 
     emailValidation (emailElement) {
@@ -78,21 +83,29 @@ export class Validator {
         if (constraint.test(postalElement.value)) {
             postalElement.setCustomValidity("");
         } else {
-            postalElement.setCustomValidity(constraint[countryValue][1]);
+            postalElement.setCustomValidity(this.postalConstraints[countryValue][1]);
         }
         return null;
     }
 
     passValidation (passElement) {
-        const value = passElement.value;
-        const constraints = this.passConstraints;
+        const trimmed = passElement.value.trim()
 
         if (passElement.validity.tooLong) {
             return "Your password can't be longer than 24 characters";
         } else if (passElement.validity.tooShort) {
             return "Your password can't be shorter than 8 characters";
         }
+        
+        const passwordErrors = this.getPasswordErrors(trimmed, this.passConstraints);
 
+        if (passwordErrors && passwordErrors.length > 0) {
+            return passwordErrors.join("\n");
+        }
+        return null;
+    }
+
+    getPasswordErrors (value, constraints) {
         const errorArray = [];
         
         for (let constraint of constraints) {
@@ -100,19 +113,12 @@ export class Validator {
                 errorArray.push(constraint.message)
             }
         }
-
-        if (!errorArray.length > 0) {
-            return errorArray;
-        }
-
-        return null;
+        return errorArray;
     }
 
-    passConfirmationValidation (passConfirmElement, passElement) {
-        const passValue = passElement.value;
-        const confirmValue = passConfirmElement.value;
+    passConfirmationValidation (password, confirmation) {
 
-        if (confirmValue.trim() !== passValue.trim()) {
+        if (confirmation.trim() !== password.trim()) {
             return "Your passwords don't match"
         }
         return null;
