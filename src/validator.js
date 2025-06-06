@@ -31,25 +31,30 @@ export class Validator {
         }
     }
 
-    groupValidation () {
+    groupValidation (nameEl, mailEl, countryEl, postalEl, passEl, confirmEl) {
+        const errors = {}
         
     }
 
     nameValidation (nameElement) {
         const trimmed = nameElement.value.trim()
+        let error = null;
 
         if (nameElement.validity.tooShort) {
-            return `Name must be at least ${nameElement.minLength} characters.`
+            error = `Name must be at least ${nameElement.minLength} characters.`
         } else if (nameElement.validity.tooLong) {
-            return `Name can't be longer than ${nameElement.maxLength} characters.`
+            error = `Name can't be longer than ${nameElement.maxLength} characters.`
+        } else if (nameElement.validity.valueMissing) {
+            error = "Please enter your name";
+        } else {
+            error = this.findInvalidCharacter(trimmed, this.nameConstraint);
         }
 
-        this.findInvalidCharacter(trimmed, this.nameConstraint)
-        return null;
+        nameElement.setCustomValidity(error || "");
+        return error;
     }
 
     findInvalidCharacter (value, pattern) {
-
         if (!pattern.test(value)) {
             for (let char of value) {
                 if (!pattern.test(char)) {
@@ -62,47 +67,64 @@ export class Validator {
     }
 
     emailValidation (emailElement) {
+        let error = null;
+
         if (emailElement.validity.typeMismatch) {
-            return "You need to enter an email address."
+            error = "You need to enter an email address."
         } else if (emailElement.validity.tooShort) {
-            return `Email should be at least ${emailElement.minLength} characters; you entered ${emailElement.value.length}`;
+            error = `Email should be at least ${emailElement.minLength} characters; you entered ${emailElement.value.length}`;
+        } else if (emailElement.validity.valueMissing) {
+            error = "Please enter your email";
         }
-        return null;
+
+        emailElement.setCustomValidity(error || "");
+        return error;
     }
 
     countryValidation (countryElement) {
+        let error = null;
+
         if (countryElement.selectedIndex === 0) {
-            return "Please choose a country"
+            error = "Please choose a country"
         }
-        return null;
+
+        countryElement.setCustomValidity(error || "");
+        return error;
     }
 
     postalValidation (countryValue, postalElement) {
         const constraint = new RegExp(this.postalConstraints[countryValue][0], "");
-        
-        if (constraint.test(postalElement.value)) {
-            postalElement.setCustomValidity("");
-        } else {
-            postalElement.setCustomValidity(this.postalConstraints[countryValue][1]);
+        let error = null;
+
+        if (postalElement.validity.valueMissing) {
+            error = "Please enter your postal code";
+        } else if (!constraint.test(postalElement.value)) {
+            error = this.postalConstraints[countryValue][1];
         }
-        return null;
+
+        postalElement.setCustomValidity(error || "");
+        return error;
     }
 
     passValidation (passElement) {
         const trimmed = passElement.value.trim()
+        let error = null;
 
         if (passElement.validity.tooLong) {
-            return "Your password can't be longer than 24 characters";
+            error = "Your password can't be longer than 24 characters";
         } else if (passElement.validity.tooShort) {
-            return "Your password can't be shorter than 8 characters";
+            error = "Your password can't be shorter than 8 characters";
+        } else if (passElement.validity.valueMissing) {
+            error = "Please set your password";
+        } else {
+            const passwordErrors = this.getPasswordErrors(trimmed, this.passConstraints);
+            if (passwordErrors.length > 0) {
+                error = passwordErrors.join("\n");
+            }
         }
-        
-        const passwordErrors = this.getPasswordErrors(trimmed, this.passConstraints);
 
-        if (passwordErrors && passwordErrors.length > 0) {
-            return passwordErrors.join("\n");
-        }
-        return null;
+        passElement.setCustomValidity(error || "");
+        return error;
     }
 
     getPasswordErrors (value, constraints) {
@@ -113,14 +135,22 @@ export class Validator {
                 errorArray.push(constraint.message)
             }
         }
+
         return errorArray;
     }
 
-    passConfirmationValidation (password, confirmation) {
+    passConfirmationValidation (passElement, confirmationElement) {
+        const password = passElement.value.trim();
+        const confirmation = confirmationElement.value.trim();
+        let error = null;
 
-        if (confirmation.trim() !== password.trim()) {
-            return "Your passwords don't match"
+        if (confirmation !== password) {
+            error = "Your passwords don't match"
+        } else if (confirmationElement.validity.valueMissing) {
+            error = "Please confirm your password";
         }
-        return null;
+        
+        confirmationElement.setCustomValidity(error || "");
+        return error;
     }
 }
