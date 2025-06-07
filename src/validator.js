@@ -31,9 +31,23 @@ export class Validator {
         }
     }
 
-    groupValidation (nameEl, mailEl, countryEl, postalEl, passEl, confirmEl) {
-        const errors = {}
-        
+    groupValidation (nameEl, emailEl, countryEl, postalEl, passEl, confirmEl) {
+        const errors            = {}
+        const nameError         = this.nameValidation(nameEl);
+        const emailError        = this.emailValidation(emailEl);
+        const countryError      = this.countryValidation(countryEl);
+        const postalError       = this.postalValidation(countryEl.value, postalEl);
+        const passError         = this.passValidation(passEl);
+        const confirmationError = this.passConfirmationValidation(passEl,confirmEl);
+
+        errors.name         = nameError;
+        errors.email        = emailError;
+        errors.country      = countryError;
+        errors.postal       = postalError;
+        errors.pass         = passError;
+        errors.confirmation = confirmationError;
+
+        return errors;
     }
 
     nameValidation (nameElement) {
@@ -62,8 +76,9 @@ export class Validator {
                 }
             }
 
-        return "Your name contains invalid characters";
+            return "Your name contains invalid characters";
         }
+        return null;
     }
 
     emailValidation (emailElement) {
