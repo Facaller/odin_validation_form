@@ -21,6 +21,8 @@
                 <div class="form-column">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" minlength="3" maxlength="100" required>
+                    <span class="error-msg" id="name-error"></span>
+
                     <label for="country">Country</label>
                     <select name="country" id="country" required>
                         <option value=""></option>
@@ -29,16 +31,24 @@
                         <option value=""></option>
                         <option value=""></option>
                     </select>
+                    <span class="error-msg" id="country-error"></span>
+
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" minlength="8" maxlength="24" required>
+                    <span class="error-msg" id="password-error"></span>
                 </div>
                 <div class="form-column">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" required>
+                    <span class="error-msg" id="email-error"></span>
+
                     <label for="postal-code">Postal Code</label>
                     <input type="text" name="postal-code" id="postal-code" required>
+                    <span class="error-msg" id="postal-error"></span>
+
                     <label for="pass-confirmation">Password Confirmation</label>
                     <input type="password" name="pass-confirmation" id="pass-confirmation" minlength="8" maxlength="24" required>
+                    <span class="error-msg" id="confirm-error"></span>
                 </div>
             </div>
             <div class="button-container">
