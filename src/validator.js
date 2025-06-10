@@ -8,6 +8,10 @@ export class Validator {
             { pattern: /[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]/, message: "You need at least one special character" }
         ]
         this.postalConstraints = {
+            none: [
+                "",
+                "Please select a country"
+            ],
             ch: [
                 "^(CH-)?\\d{4}$",
                 "Swiss postal codes must have exactly 4 digits: e.g. CH-1950 or 1950",
@@ -50,6 +54,17 @@ export class Validator {
         return errors;
     }
 
+    displayError (inputEl, message) {
+        inputEl.setCustomValidity(message || "");
+
+        const errorID = `${inputEl.id}-error`;
+        const errorElement = document.getElementById(errorID);
+
+        if (errorElement) {
+            errorElement.textContent = message || "";
+        }
+    }
+
     nameValidation (nameElement) {
         const trimmed = nameElement.value.trim()
         let error = null;
@@ -64,7 +79,7 @@ export class Validator {
             error = this.findInvalidCharacter(trimmed, this.nameConstraint);
         }
 
-        nameElement.setCustomValidity(error || "");
+        this.displayError(nameElement, error);
         return error;
     }
 
@@ -92,7 +107,7 @@ export class Validator {
             error = "Please enter your email";
         }
 
-        emailElement.setCustomValidity(error || "");
+        this.displayError(emailElement, error);
         return error;
     }
 
@@ -103,7 +118,7 @@ export class Validator {
             error = "Please choose a country"
         }
 
-        countryElement.setCustomValidity(error || "");
+        this.displayError(countryElement, error);
         return error;
     }
 
@@ -117,7 +132,7 @@ export class Validator {
             error = this.postalConstraints[countryValue][1];
         }
 
-        postalElement.setCustomValidity(error || "");
+        this.displayError(postalElement, error);
         return error;
     }
 
@@ -138,7 +153,7 @@ export class Validator {
             }
         }
 
-        passElement.setCustomValidity(error || "");
+        this.displayError(passElement, error);
         return error;
     }
 
@@ -165,7 +180,7 @@ export class Validator {
             error = "Please confirm your password";
         }
         
-        confirmationElement.setCustomValidity(error || "");
+        this.displayError(confirmationElement, error);
         return error;
     }
 }
