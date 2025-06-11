@@ -60,10 +60,12 @@ export class DOMHandler {
 
     checkPostalValidation = () => {
         const postal = this.elements.postalInput;
-        const countryValue = this.elements.countryInput.value;
+        const country = this.elements.countryInput;
 
         postal.addEventListener('input', () => {
+            const countryValue = country.value;
             this.validator.postalValidation(countryValue, postal);
+            console.log(`${postal.value}`);
         });
     }
 
@@ -83,8 +85,7 @@ export class DOMHandler {
             this.validator.passConfirmationValidation(password, confirm);
         });
     }
-
-
+}
 
         // checkFormValidation = () => {
     //     const form     = this.elements.form;
@@ -99,4 +100,3 @@ export class DOMHandler {
     //         this.validator.groupValidation(name, email, country, postal, password, confirm);
     //     })
     // }
-}

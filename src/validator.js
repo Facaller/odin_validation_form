@@ -123,12 +123,13 @@ export class Validator {
     }
 
     postalValidation (countryValue, postalElement) {
-        const constraint = new RegExp(this.postalConstraints[countryValue][0], "");
+        const constraint = new RegExp(this.postalConstraints[countryValue][0]);
         let error = null;
 
         if (postalElement.validity.valueMissing) {
             error = "Please enter your postal code";
-        } else if (!constraint.test(postalElement.value)) {
+            console.log('Postal code is missing');
+        } else if (!constraint.test(postalElement.value.trim())) {
             error = this.postalConstraints[countryValue][1];
         }
 
