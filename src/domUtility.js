@@ -51,9 +51,12 @@ export class DOMHandler {
 
     checkCountryValidation = () => {
         const country = this.elements.countryInput;
+        const postal = this.elements.postalInput;
 
         country.addEventListener('change', () => {
             this.validator.countryValidation(country);
+            postal.value = "";
+            this.validator.postalValidation(country.value, postal);
             console.log(`${country.value}`);
         });
     }
@@ -63,7 +66,7 @@ export class DOMHandler {
         const country = this.elements.countryInput;
 
         postal.addEventListener('input', () => {
-            const countryValue = country.value;
+            let countryValue = country.value;
             this.validator.postalValidation(countryValue, postal);
             console.log(`${postal.value}`);
         });

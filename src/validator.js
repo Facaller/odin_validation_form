@@ -8,10 +8,6 @@ export class Validator {
             { pattern: /[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]/, message: "You need at least one special character" }
         ]
         this.postalConstraints = {
-            none: [
-                "",
-                "Please select a country"
-            ],
             ch: [
                 "^(CH-)?\\d{4}$",
                 "Swiss postal codes must have exactly 4 digits: e.g. CH-1950 or 1950",
@@ -123,14 +119,21 @@ export class Validator {
     }
 
     postalValidation (countryValue, postalElement) {
-        const constraint = new RegExp(this.postalConstraints[countryValue][0]);
         let error = null;
+
+        if (!this.postalConstraints.hasOwnProperty(countryValue)) {
+            error = "Please choose a country before entering a postal code";
+            this.displayError(postalElement, error);
+            return error;
+        }
+
+        const [pattern, message] = this.postalConstraints[countryValue];
+        const constraint = new RegExp(pattern);
 
         if (postalElement.validity.valueMissing) {
             error = "Please enter your postal code";
-            console.log('Postal code is missing');
         } else if (!constraint.test(postalElement.value.trim())) {
-            error = this.postalConstraints[countryValue][1];
+            error = message;
         }
 
         this.displayError(postalElement, error);
