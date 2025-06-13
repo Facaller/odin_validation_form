@@ -58,6 +58,7 @@ export class Validator {
 
         if (errorElement) {
             errorElement.textContent = message || "";
+            errorElement.style.display = message ? "block" : "none";
         }
     }
 

@@ -30,6 +30,39 @@ export class DOMHandler {
         this.checkPostalValidation();
         this.checkPasswordValidation();
         this.checkConfirmValidation();
+        this.checkFormValidation();
+    }
+
+    checkFormValidation = () => {
+        const form     = this.elements.form;
+        const name     = this.elements.nameInput;
+        const email    = this.elements.emailInput;
+        const country  = this.elements.countryInput;
+        const postal   = this.elements.postalInput;
+        const password = this.elements.passwordInput;
+        const confirm  = this.elements.confirmInput;
+
+        form.addEventListener("submit", (event) => {
+            if (test) {
+                const testForm = this.validator.groupValidation(
+                    name, 
+                    email, 
+                    country, 
+                    postal, 
+                    password, 
+                    confirm);
+                event.preventDefault();
+                alert('wrong')
+            }
+        });
+    }
+
+    checkForm = () => {
+        const form = this.elements.form;
+        const formInputs = this.validator.groupValidation()
+        form.addEventListener("submit", (event) => {
+            
+        });
     }
 
     checkNameValidation = () => {
@@ -89,17 +122,3 @@ export class DOMHandler {
         });
     }
 }
-
-        // checkFormValidation = () => {
-    //     const form     = this.elements.form;
-    //     const name     = this.elements.nameInput;
-    //     const email    = this.elements.emailInput;
-    //     const country  = this.elements.countryInput;
-    //     const postal   = this.elements.postalInput;
-    //     const password = this.elements.passwordInput;
-    //     const confirm  = this.elements.confirmInput;
-
-    //     form.addEventListener('input', () => {
-    //         this.validator.groupValidation(name, email, country, postal, password, confirm);
-    //     })
-    // }

@@ -46,8 +46,9 @@ img {
 }
 
 .error-msg {
-    width: fit-content;
-    height: fit-content;
+    color: red;
+    font-size: 0.85rems;
+    display: none;
     border: 4px solid black;
     border-radius: 5px;
 }
