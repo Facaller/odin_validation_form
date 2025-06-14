@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'dalekpinpoint';
+    src:
+        url(./assets/fonts/dalekpinpointbold-webfont.woff2) format(woff2),
+        url(./assets/fonts/dalekpinpointbold-webfont.woff) format(woff);
+        font-weight: normal;
+        font-style: normal;
+}
+
+@font-face {
+    font-family: 'romanica';
+    src:
+        url(./assets/fonts/romanica-webfont.woff2) format(woff2),
+        url(./assets/fonts/romanica-webfont.woff) format(woff);
+        font-weight: normal;
+        font-style: normal;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -45,10 +63,41 @@ img {
     
 }
 
-.error-msg {
-    color: red;
-    font-size: 0.85rems;
-    display: none;
-    border: 4px solid black;
+input,
+select {
+    padding: 0 5px;
+    margin-left: 5px;
+    width: 250px;
+    height: 2rem;
+    outline: none;
+    font: 1rem 'romanica';
+    border: 1px solid hsl(0, 0%, 90%);
     border-radius: 5px;
 }
+
+label {
+    margin-bottom: 4px;
+    font: .9rem 'romanica';
+    text-transform: uppercase;
+    letter-spacing: .15rem;
+}
+
+input:focus {
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    background: hsl(0, 0%, 99%);
+}
+
+.error-msg {
+    padding: 2px 5px;
+    margin-left: 5px;
+    width: 250px;
+    font: 1rem 'romanica';
+    display: none;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* input:invalid {
+    border-color: #900;
+    background-color: #fdd;
+} */

@@ -43,14 +43,14 @@ export class DOMHandler {
         const confirm  = this.elements.confirmInput;
 
         form.addEventListener("submit", (event) => {
+            const test = this.validator.groupValidation(
+                name, 
+                email, 
+                country, 
+                postal, 
+                password, 
+                confirm);
             if (test) {
-                const testForm = this.validator.groupValidation(
-                    name, 
-                    email, 
-                    country, 
-                    postal, 
-                    password, 
-                    confirm);
                 event.preventDefault();
                 alert('wrong')
             }
