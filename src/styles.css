@@ -31,7 +31,7 @@ img {
 
 .container {
     display: grid;
-    grid-template-columns: 1.6fr 2fr;
+    grid-template-columns: 1.3fr 2fr;
 }
 
 /* Header section */
@@ -52,11 +52,22 @@ img {
 
 .form-row {
     display: flex;
+    gap: 45px;
 }
 
 .form-column {
     display: flex;
     flex-direction: column;
+    width: 380px;
+    height: 550px;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 150px;
 }
 
 .button-container {
@@ -64,19 +75,32 @@ img {
 }
 
 input,
-select {
-    padding: 0 5px;
+select,
+.error-msg {
     margin-left: 5px;
-    width: 250px;
-    height: 2rem;
-    outline: none;
+    width: 350px;
     font: 1rem 'romanica';
-    border: 1px solid hsl(0, 0%, 90%);
     border-radius: 5px;
 }
 
+input,
+select {
+    padding: 0px 5px;
+    margin: 8px 5px;
+    height: 2rem;
+    outline: none;
+    border: 1px solid hsl(0, 0%, 90%);
+}
+
+.error-msg {
+    padding: 2px 5px;
+    margin-bottom: 12px;
+    display: none;
+    border: 2px solid #900;
+}
+
 label {
-    margin-bottom: 4px;
+    margin-top: 4px;
     font: .9rem 'romanica';
     text-transform: uppercase;
     letter-spacing: .15rem;
@@ -87,17 +111,8 @@ input:focus {
     background: hsl(0, 0%, 99%);
 }
 
-.error-msg {
-    padding: 2px 5px;
-    margin-left: 5px;
-    width: 250px;
-    font: 1rem 'romanica';
-    display: none;
-    border: 1px solid black;
-    border-radius: 5px;
-}
+
 
 /* input:invalid {
-    border-color: #900;
     background-color: #fdd;
 } */
