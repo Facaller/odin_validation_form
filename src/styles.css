@@ -32,21 +32,42 @@ html, body {
 /* General */
 
 img {
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
 }
 
 .container {
     display: grid;
-    grid-template-columns: minmax(270px, 1.1fr)  2fr;
+    grid-template-columns: minmax(270px, 1.3fr)  2fr;
     align-items: center;
     
 }
 
 /* Header section */
 
+h1 {
+    padding-left: 10px;
+    font: 4rem 'dalekpinpoint';
+    text-align: center;
+    color: #ffffff;
+}
+
 .header {
     grid-column: 1/2;
+    display: flex;
+    align-items: flex-start;
+    background: url(./assets/images/thinker.png);
+    height: 100%;
+}
+
+.header-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10rem;
+    background: rgb(0 0 0 / 40%);
 }
 
 /* Form section */
@@ -57,6 +78,8 @@ img {
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
+    margin-left: 30px;
+    background-color: #fdfdf7;
 }
 
 .form-container {
@@ -65,15 +88,16 @@ img {
 
 .form-row {
     display: flex;
-    
+    flex-wrap: wrap;
+    background-color: #ffffff;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 .form-column {
     display: flex;
     flex-direction: column;
-    width: 380px;
+    width: 300px;
     height: 460px;
-    
 }
 
 .form-group {
@@ -93,14 +117,26 @@ img {
 }
 
 button {
-    font: 1.1rem 'romanica';
+    padding: 10px 40px;
+    font: bold 1em 'romanica';
+    letter-spacing: .03rem;
+    border-radius: 9px;
+    border: hsl(10, 70%, 50%);
+    background-color: hsl(10, 70%, 62%);
+    cursor: pointer;
+}
+
+a {
+    color: hsl(10, 70%, 62%);
+    text-decoration: none;
+    font-weight: bold;
 }
 
 input,
 select,
 .error-msg {
     margin-left: 5px;
-    width: 350px;
+    width: 250px;
     font: 1rem 'romanica';
     border-radius: 5px;
 }
