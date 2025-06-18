@@ -16,6 +16,8 @@
         font-style: normal;
 }
 
+/* General */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,8 +30,13 @@ html, body {
     height: 100%;
 }
 
+h2 {
+    font-family: 'romanica';
+}
 
-/* General */
+p {
+    font: 1.2rem 'romanica';
+}
 
 img {
     height: 100px;
@@ -65,7 +72,7 @@ h1 {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 10px 0;
+    padding: 15px 0;
     margin-top: 10rem;
     background: rgb(0 0 0 / 40%);
 }
@@ -78,26 +85,26 @@ h1 {
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
-    margin-left: 30px;
-    background-color: #fdfdf7;
 }
 
-.form-container {
-    
+.form-text {
+    padding: 0px 250px 10px 30px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 .form-row {
     display: flex;
     flex-wrap: wrap;
     background-color: #ffffff;
-    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding-left: 30px;
 }
 
 .form-column {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 460px;
+    min-width: 300px;
+    min-height: 460px;
 }
 
 .form-group {
@@ -105,31 +112,6 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     height: 150px;
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    margin-top: 30px;
-    font: 1.2rem 'romanica';
-}
-
-button {
-    padding: 10px 40px;
-    font: bold 1em 'romanica';
-    letter-spacing: .03rem;
-    border-radius: 9px;
-    border: hsl(10, 70%, 50%);
-    background-color: hsl(10, 70%, 62%);
-    cursor: pointer;
-}
-
-a {
-    color: hsl(10, 70%, 62%);
-    text-decoration: none;
-    font-weight: bold;
 }
 
 input,
@@ -169,8 +151,32 @@ input:focus {
     background: hsl(0, 0%, 99%);
 }
 
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding-left: 30px;
+    padding-top: 10px;
+    box-shadow: 2px -4px 5px rgba(0, 0, 0, 0.1);
+}
 
+button {
+    padding: 10px 40px;
+    font: bold 1.1rem 'romanica';
+    letter-spacing: .03rem;
+    border-radius: 9px;
+    border: hsl(10, 70%, 50%);
+    background-color: hsl(10, 70%, 62%);
+    cursor: pointer;
+}
 
-/* input:invalid {
+a {
+    color: hsl(10, 70%, 62%);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+input:invalid {
     background-color: #fdd;
-} */
+}
