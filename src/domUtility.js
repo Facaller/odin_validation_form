@@ -9,6 +9,7 @@ export class Elements {
         this.postalInput   = document.querySelector('#postal-code');
         this.passwordInput = document.querySelector('#password');
         this.confirmInput  = document.querySelector('#pass-confirmation');
+        this.inputs        = document.querySelectorAll("input");
 
         this.nameError     = document.querySelector('#name-error');
         this.emailError    = document.querySelector('#email-error');
@@ -30,6 +31,7 @@ export class DOMHandler {
         this.checkPostalValidation();
         this.checkPasswordValidation();
         this.checkConfirmValidation();
+        this.inputFocus();
         this.checkFormValidation();
     }
 
@@ -51,6 +53,7 @@ export class DOMHandler {
                 password, 
                 confirm);
             if (test) {
+                console.log('arrive here')
                 event.preventDefault();
                 alert('wrong')
             }
@@ -62,6 +65,15 @@ export class DOMHandler {
         const formInputs = this.validator.groupValidation()
         form.addEventListener("submit", (event) => {
             
+        });
+    }
+
+    inputFocus = () => {
+        const formInputs = this.elements.inputs;
+        formInputs.forEach((input) => {
+            input.addEventListener("blur", () => {
+                input.classList.add("was-touched");
+            });
         });
     }
 

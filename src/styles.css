@@ -186,18 +186,25 @@ button {
     cursor: pointer;
 }
 
+button:hover,
+a:hover {
+    transform: scale(1.05);
+    transition: transform 120ms ease-in-out;
+}
+
 a {
+    display: inline-block;
     color: hsl(10, 70%, 62%);
     text-decoration: none;
     font-weight: bold;
 }
 
-input:invalid,
-select:invalid {
+input.was-touched:invalid,
+select.was-touched:invalid {
     background-color: #fdd;
 }
 
-input:valid,
-select:valid {
+input.was-touched:valid,
+select.was-touched:valid {
     border-color: #2e7d32;
 }
