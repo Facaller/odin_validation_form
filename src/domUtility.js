@@ -52,10 +52,15 @@ export class DOMHandler {
                 postal, 
                 password, 
                 confirm);
-            if (test) {
-                console.log('arrive here')
+
+            const hasErrors = Object.values(test).some(value => value);
+
+            if (hasErrors) {
                 event.preventDefault();
-                alert('wrong')
+                alert("Fix errors")
+            } else {
+                event.preventDefault();
+                alert("Good job")
             }
         });
     }
