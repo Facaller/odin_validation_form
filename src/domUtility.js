@@ -95,7 +95,6 @@ export class DOMHandler {
         
         email.addEventListener('input', () => {
             this.validator.emailValidation(email);
-            console.log("emailValidation called");
         });
     }
 
@@ -107,7 +106,6 @@ export class DOMHandler {
             this.validator.countryValidation(country);
             postal.value = "";
             this.validator.postalValidation(country.value, postal);
-            console.log(`${country.value}`);
         });
     }
 
@@ -118,7 +116,6 @@ export class DOMHandler {
         postal.addEventListener('input', () => {
             let countryValue = country.value;
             this.validator.postalValidation(countryValue, postal);
-            console.log(`${postal.value}`);
         });
     }
 
